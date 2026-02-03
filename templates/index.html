@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeons & Adventures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ Dungeons & Adventures ⚔️</h1>
+            <p>A D&D-Style Text Adventure Game</p>
+        </header>
+
+        <main id="game-container">
+            <!-- Character Creation -->
+            <div id="character-creation" class="screen hidden">
+                <h2>Character Creation</h2>
+                <form id="creation-form">
+                    <div class="form-group">
+                        <label for="char-name">Character Name:</label>
+                        <input type="text" id="char-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adventure-type">Adventure Type:</label>
+                        <select id="adventure-type" required>
+                            <option value="normal">Normal Adventure (Save Hawkins)</option>
+                            <option value="upside_down">Upside Down (Serve Vecna)</option>
+                        </select>
+                        <p class="description" id="adventure-description">Fight to save the world from the Upside Down</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="char-race">Race:</label>
+                        <select id="char-race" required>
+                            <option value="">Select a race...</option>
+                        </select>
+                        <p class="description" id="race-description"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="char-class">Class:</label>
+                        <select id="char-class" required>
+                            <option value="">Select a class...</option>
+                        </select>
+                        <p class="description" id="class-description"></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Create Character</button>
+                </form>
+            </div>
+
+            <!-- Main Game Screen -->
+            <div id="game-screen" class="screen hidden">
+                <div class="sidebar">
+                    <div class="character-info">
+                        <h3 id="char-name-display"></h3>
+                        <div class="stats">
+                            <div class="stat">
+                                <span>Level:</span>
+                                <span id="level">1</span>
+                            </div>
+                            <div class="stat">
+                                <span>HP:</span>
+                                <span id="hp">0</span>/<span id="max-hp">0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Gold:</span>
+                                <span id="gold">0</span>g
+                            </div>
+                            <div class="stat">
+                                <span>XP:</span>
+                                <span id="experience">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="abilities">
+                        <h4>Abilities</h4>
+                        <div class="ability-score">STR: <span id="str">10</span></div>
+                        <div class="ability-score">DEX: <span id="dex">10</span></div>
+                        <div class="ability-score">CON: <span id="con">10</span></div>
+                        <div class="ability-score">INT: <span id="int">10</span></div>
+                        <div class="ability-score">WIS: <span id="wis">10</span></div>
+                        <div class="ability-score">CHA: <span id="cha">10</span></div>
+                    </div>
+
+                    <div class="inventory">
+                        <h4>Inventory</h4>
+                        <div id="inventory-list"></div>
+                    </div>
+                </div>
+
+                <div class="main-content">
+                    <div class="message-log" id="message-log">
+                        <p>Welcome, adventurer! What would you like to do?</p>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-action" id="btn-encounter">🗡️ Start Encounter</button>
+                        <button class="btn-action" id="btn-shop">🏪 Visit Shop</button>
+                        <button class="btn-action" id="btn-rest">🛏️ Rest at Inn</button>
+                        <button class="btn-action" id="btn-new-game">🔄 New Game</button>
+                    </div>
+
+                    <div id="combat-section" class="hidden">
+                        <div id="enemy-info"></div>
+                        <div id="combat-actions"></div>
+                    </div>
+
+                    <div id="shop-section" class="hidden">
+                        <div id="shop-items"></div>
+                    </div>
+
+                    <!-- Upside Down Section -->
+                    <div id="upside-down-section" class="hidden">
+                        <div class="upside-down-stats">
+                            <h3>Vecna's Realm Status</h3>
+                            <div class="stat">
+                                <span>Vecna's Power:</span>
+                                <span id="vecna-power">0</span>/100
+                            </div>
+                            <div class="stat">
+                                <span>Vecna's Favor:</span>
+                                <span id="vecna-favor">0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Missions Completed:</span>
+                                <span id="missions-completed">0</span>
+                            </div>
+                            <div class="stat">
+                                <span>People Captured:</span>
+                                <span id="captured-people">0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Resources Gathered:</span>
+                                <span id="hawkins-resources">0</span>
+                            </div>
+                        </div>
+                        <div id="upside-down-actions" class="actions"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="screen">
+                <div class="welcome">
+                    <h2>Welcome to Dungeons & Adventures</h2>
+                    <p>A complete D&D-style text adventure game</p>
+                    <button class="btn-primary" id="btn-create">Create Character</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Dungeons & Adventures - A Text Adventure Game</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>
